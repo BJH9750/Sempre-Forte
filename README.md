@@ -26,5 +26,5 @@
     </code></pre>
 2. declare function that you will use with ***native*** keyword
     <pre><code>example)
-     public native string stringFromJNI();
+     public native String stringFromJNI();
     </code></pre>
