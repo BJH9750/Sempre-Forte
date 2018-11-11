@@ -1,7 +1,5 @@
 #include "oategrity_map.hpp"
 
-#define SHA256_SIZE 32
-
 using namespace std;
 
 using Byte_Arr = vector< vector<uint8_t> >;
@@ -30,6 +28,29 @@ bool not_match(uint8_t lhs, uint8_t rhs)
 }
 
 uint32_t* op_table = init_table();
+/*
+	ifstream ifs;
+	ifs.open("classes.dex", ios::binary);
+	ifs.unsetf(std::ios::skipws);
+	ifs.seekg(0,ios::end);
+	uint32_t l = ifs.tellg();
+	ifs.seekg(0, ios::beg);
+	vector<uint8_t> vec;
+	vec.reserve(l);
+	vec.insert(vec.begin(), (istream_iterator<uint8_t>(ifs)), (istream_iterator<uint8_t>()));
+	unique_ptr<LIEF::DEX::File> dex_parse = LIEF::DEX::Parser::parse(vec);
+	LIEF::DEX::File* dex = dex_parse.get();
+*/
+bool check_valid(vector<uint8_t> &dex_raw, vector<uint8_t> &vdex_raw)
+{
+	unique_ptr<LIEF::DEX::FILE> dex_parse = LIEF::DEX::Parser::parse(dex_raw);
+	unique_ptr<LIEF::DEX::FILE> vdex_parse = LIEF::DEX::Parser::parse(vdex_raw);
+	uint64_t dex_size, vdex_size;
+
+	if (dex_size != vdex_size) return false;
+	
+	LIEF::DEX::Header dex_h = dex
+}
 
 int main(int argc, char** argv)
 {
